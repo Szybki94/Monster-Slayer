@@ -1,18 +1,29 @@
+function getRandomNum(min, max) {
+    return Math.floor(Math.random() * (Math.ceil(max) - Math.ceil(min) + 1)) + Math.ceil(min);
+}
+
 const app = Vue.createApp({
     data () {
         return {
-            playerHealth: undefined,
-            monsterHealth: undefined,
+            playerHealth: 100,
+            monsterHealth: 100,
         };
     },
 
     methods: {
         attackMonster () {
-            const min = Math.ceil(0);
-            const max = Math.floor(20);
-            const result = Math.floor(Math.random() * (max - min + 1)) + min;
-            console.log(result)
-            return result
+            const attackValue = getRandomNum(1, 20)
+            this.monsterHealth -= attackValue
+            console.log("Monster health:",this.monsterHealth)
+            return this.monsterHealth
+        },
+        attackPlayer () {
+            for (let i=0; i<3; i++) {
+                const attackValue = getRandomNum(1, 10)
+                this.playerHealth -= attackValue
+            }
+            console.log("Player health", this.playerHealth)
+            return this.playerHealth
         }
     },
 })
