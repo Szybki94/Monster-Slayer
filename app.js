@@ -20,7 +20,10 @@ const app = Vue.createApp({
         },
         specialAttackButtonDisabled() {
             return this.currentRound % 3 !== 0;
-        }
+        },
+        healButtondDisabled () {
+            return this.playerHealth >=80;
+        },
     },
 
     methods: {
@@ -46,6 +49,18 @@ const app = Vue.createApp({
             }
             console.log("Monster health after special attack:",this.monsterHealth)
             this.attackPlayer();
+        },
+        healPlayer () {
+            this.currentRound++;
+            for (i=0; i<6; i++) {
+                const healValue = getRandomNum(1, 6);
+                // console.log(`Dice ${i+1}: `, healValue)
+                this.playerHealth += healValue;
+                if (this.playerHealth > 100) {
+                    this.playerHealth = 100
+                }
+            }
+            this.attackPlayer()
         }
     },
 })
