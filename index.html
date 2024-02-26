@@ -29,7 +29,12 @@
           <div class="healthbar__value" :style="playerBarStyles"></div>
         </div>
       </section>
-      <section id="controls">
+      <section class="container" v-if="gameOverMessage">
+        <h2>GAME OVER</h2>
+        <h3>{{ gameOverMessage }}</h3>
+        <button @click="resetGame">RESTART</button>
+      </section>
+      <section id="controls" v-if="!gameOverMessage">
         <button @click="attackMonster">ATTACK</button>
         <button :disabled="specialAttackButtonDisabled"  @click="specialAttack">SPECIAL ATTACK</button>
         <button :disabled="healButtondDisabled" @click="healPlayer">HEAL</button>

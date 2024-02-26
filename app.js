@@ -8,6 +8,7 @@ const app = Vue.createApp({
             playerHealth: 100,
             monsterHealth: 100,
             currentRound: 0,
+            gameOverMessage: null,
         };
     },
 
@@ -24,6 +25,25 @@ const app = Vue.createApp({
         healButtondDisabled () {
             return this.playerHealth >=80;
         },
+    },
+
+    watch: {
+        playerHealth(value) {
+            if (value <= 0 && this.monsterHealth <= 0) {
+                this.gameOverMessage = "EPIC DEATH";
+                this.monsterHealth = 0;
+                this.playerHealth = 0;
+            } else if (value <= 0) {
+                this.gameOverMessage = "YOU DIED";
+                this.playerHealth = 0;
+            }
+        },
+        monsterHealth(value) {
+            if (value <= 0) {
+                this.gameOverMessage = "GREAT VICTORY!!!";
+                this.monsterHealth = 0;
+            }
+        }
     },
 
     methods: {
@@ -61,6 +81,12 @@ const app = Vue.createApp({
                 }
             }
             this.attackPlayer()
+        },
+        resetGame () {
+            this.playerHealth = 100;
+            this.monsterHealth = 100;
+            this.currentRound = 100;
+            this.gameOverMessage = null;
         }
     },
 })
