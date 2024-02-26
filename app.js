@@ -82,6 +82,15 @@ const app = Vue.createApp({
             }
             this.attackPlayer()
         },
+        surrender () {
+            const options = {
+                0: "MONSTER ATE YOU AND SPARE VILLAGERS",
+                1: "MONSTER ATE YOU AND MAKE MASACRE",
+                2: "MONSTER BECAME YOUR FRIEND",
+            }
+            const random = getRandomNum(0,2)
+            this.gameOverMessage = options[random]
+        },
         resetGame () {
             this.playerHealth = 100;
             this.monsterHealth = 100;
