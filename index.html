@@ -42,7 +42,19 @@
       </section>
       <section id="log" class="container">
         <h2>Battle Log</h2>
-        <ul></ul>
+        <ul v-for="(log, index) in logMessages" :key="index">
+          <li>
+            <span :class="actorLogClass(log.actor)">
+              {{ log.actor }} - 
+            </span>
+            <span :class="eventLogClass(log.event)">
+              {{ log.event }} - 
+            </span>
+            <span>
+              {{ log.value }}
+            </span>
+          </li>
+        </ul>
       </section>
     </div>
   </body>
